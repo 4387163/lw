@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <contextName>XAMS-LOG</contextName>
+
+    <appender name="xqauntconsole" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%c][%thread][%X{tradeNo}][%p]-%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="xquantbusiness" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <Encoding>UTF-8</Encoding>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%c][%thread][%X{tradeNo}][%p]-%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${WORKING_PATH}/logs/business-%d{yyyy-MM-dd'.log'}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="xquantframework" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <Encoding>UTF-8</Encoding>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%c][%thread][%X{tradeNo}][%p]-%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${WORKING_PATH}/logs/framework-%d{yyyy-MM-dd'.log'}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="xquantbatch" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <Encoding>UTF-8</Encoding>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%c][%thread][%X{tradeNo}][%p]-%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${WORKING_PATH}/logs/batch-%d{yyyy-MM-dd'.log'}
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <logger name="org.springframework" additivity="false" level="ERROR">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantframework" />
+    </logger>
+
+    <logger name="org.mybatis" additivity="false" level="DEBUG">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantframework" />
+    </logger>
+
+    <logger name="org.activiti" additivity="false" level="ERROR">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantframework" />
+    </logger>
+    
+    <logger name="druid.sql.DataSource" additivity="false" level="DEBUG">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantframework" />
+    </logger>
+
+    <logger name="com.xquant" additivity="false" level="DEBUG">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantbusiness" />
+    </logger>
+
+    <logger name="com.xQuant" additivity="false" level="DEBUG">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantbusiness" />
+    </logger>
+
+    <logger name="UNExceptionLog" additivity="false" level="ERROR">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantbusiness" />
+    </logger>
+
+    <logger name="org.apache" additivity="false" level="ERROR">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantframework" />
+    </logger>
+
+    <logger name="org.docx4j.convert.out.common" additivity="false" level="ERROR">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantframework" />
+    </logger>
+
+    <logger name="com.xQuant.base.foundation.batchtask.BatchTaskServiceBO" additivity="false" level="INFO">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantbatch" />
+    </logger>
+    
+    <root level="DEBUG">
+        <appender-ref ref="xqauntconsole" />
+        <appender-ref ref="xquantbusiness" />
+        <appender-ref ref="xquantframework" />
+    </root>
+</configuration>
